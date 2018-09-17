@@ -4,8 +4,8 @@ namespace WarriorWars.Equipment
 {
     class Armor
     {
-        private int goodGuyArmor;
-        private int badGuyArmor;
+        private const int GOOD_GUY_ARMOR = 5;
+        private const int BAD_BUY_ARMOR = 5;
 
         private int armorPoints;
 
@@ -22,10 +22,10 @@ namespace WarriorWars.Equipment
             switch (faction)
             {
                 case Faction.GoodGuy:
-                    armorPoints = goodGuyArmor;
+                    armorPoints = GOOD_GUY_ARMOR;
                     break;
                 case Faction.BadGuy:
-                    armorPoints = badGuyArmor;
+                    armorPoints = BAD_BUY_ARMOR;
                     break;
                 default:
                     break;
