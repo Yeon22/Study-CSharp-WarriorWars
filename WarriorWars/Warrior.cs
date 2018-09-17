@@ -1,12 +1,14 @@
-﻿using WarriorWars.Enum;
+﻿using System;
+using System.Threading;
+using WarriorWars.Enum;
 using WarriorWars.Equipment;
 
 namespace WarriorWars
 {
     class Warrior
     {
-        private const int GOOD_GUY_STARTING_HEALTH = 100;
-        private const int BAD_GUY_STARTING_HEALTH = 100;
+        private const int GOOD_GUY_STARTING_HEALTH = 20;
+        private const int BAD_GUY_STARTING_HEALTH = 20;
 
         private readonly Faction FACTION;
 
@@ -45,6 +47,30 @@ namespace WarriorWars
                     break;
                 default:
                     break;
+            }
+        }
+
+        public void Attack(Warrior enemy)
+        {
+            int damage = weapon.Damage / enemy.armor.ArmorPoints;
+
+            enemy.health = enemy.health - damage;
+            // enemy.health -= damage;
+
+            AttackResult(enemy, damage);
+        }
+
+        private void AttackResult(Warrior enemy, int damage)
+        {
+            if (enemy.health <= 0)
+            {
+                enemy.isAlive = false;
+                Tools.ColorfulWriteLine($"{enemy.name} is dead!", ConsoleColor.Red);
+                Tools.ColorfulWriteLine($"{name} is victorious!", ConsoleColor.Green);
+            }
+            else
+            {
+                Console.WriteLine($"{name} attacked {enemy.name}. {damage} damage was inflicted to {enemy.name}, remaining health of {enemy.name} is {enemy.health}.");
             }
         }
     }
